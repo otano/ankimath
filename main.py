@@ -19,8 +19,12 @@ CSS = """
 .latex {
  font-size: 1.5em;
 }
-"""
 
+.mjx-mi { color: red; }     /* variables */
+.mjx-mn { color: green; }   /* nombres */
+.mjx-mo { color: blue; }    /* opérateurs */
+"""
+±
 def create_anki_deck(input_file, output_file):
     """
     Crée un paquet Anki (.apkg) à partir d'un fichier CSV.
@@ -29,7 +33,7 @@ def create_anki_deck(input_file, output_file):
     # Ce modèle inclut le support pour MathJax en entourant les champs de `\(...\)`
     anki_model = genanki.Model(
         MODEL_ID,
-        'Trigonométrie Gemini',
+        'math_formulae',
         fields=[
             {'name': 'Recto'},
             {'name': 'VersoSolution'},
@@ -37,15 +41,17 @@ def create_anki_deck(input_file, output_file):
         ],
         templates=[
             {
-                'name': 'Carte Trigonométrie',
-                'qfmt': r'<div class="latex">\({{Recto}}\)<\/div>',
-                'afmt': r'{{FrontSide}}<hr id="answer"><div class="latex">\({{VersoSolution}}\)<\/div><br><small>{{VersoInfos}}<\/small>',
+                'name': 'math',
+                'qfmt': r'<div class="latex">\({{Recto}}\)</div>',
+                'afmt': r'{{FrontSide}}<hr id="answer"><div class="latex">\({{VersoSolution}}\)</div><br><small>{{VersoInfos}}</small>',
             },
         ],
         css=CSS)
 
     # Création du paquet Anki
     anki_deck = genanki.Deck(
+        # 1 << 30 en d'autre terme 1 * 2**30, c.a.d  1,073,741,824.
+        # technique pour se faire un unique id en tapant alléatoirement dans une fourchette massive 
         random.randrange(1 << 30, 1 << 31),
         'Trigonométrie via CSV'
     )
@@ -72,7 +78,7 @@ def create_anki_deck(input_file, output_file):
     print(f"Le paquet Anki '{output_file}' a été créé avec succès !")
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Crée un paquet Anki (.apkg) à partir d'un fichier CSV pour des révisions de trigonométrie.")
+    parser = argparse.ArgumentParser(description="Crée un paquet Anki (.apkg) à partir d'un fichier CSV pour des révisions de math.")
     parser.add_argument('--input', dest='input_file', default='formulas.csv',
                         help="Chemin vers le fichier CSV d'entrée (par défaut: formulas.csv)")
     parser.add_argument('--output', dest='output_file', default='trigo_deck.apkg',
