@@ -1,0 +1,4 @@
+recto,verso_solution,verso_infos
+"\cos^2(\\theta) + \sin^2(\\theta)","1","Identité pythagoricienne fondamentale."
+"\frac{\sin(2\\theta)}{\sin(\\theta)}","2\\cos(\\theta)","Formule de l'angle double. Valide pour \\(\\sin(\\theta) \\neq 0\\)."
+"\tan(\\alpha + \\beta)","\frac{\\tan(\\alpha) + \\tan(\\beta)}{1 - \\tan(\\alpha)\\tan(\\beta)}","Formule d'addition pour la tangente."
