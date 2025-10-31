@@ -52,7 +52,7 @@ def create_anki_deck(input_file, output_file, force=False):
             {
                 "name": "math",
                 "qfmt": r'<div class="latex">\({{Recto}}\)</div>',
-                "afmt": r'{{FrontSide}}<hr id="answer"><div class="latex">\({{VersoSolution}}\)</div><div><br><small>{{VersoInfo1}}</small><br><small>{{VersoInfo2}}</small></div>',
+                "afmt": r'{{FrontSide}}<hr id="answer"><div class="latex">\({{VersoSolution}}\)</div><div><br><small>\({{VersoInfo1}}\)</small><br><small>\({{VersoInfo2}}\)</small></div>',
             },
         ],
         css=CSS,
