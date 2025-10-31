@@ -1,4 +1,21 @@
-recto,verso_solution,verso_infos
-"\cos^2(\\theta) + \sin^2(\\theta)","1","Identité pythagoricienne fondamentale."
-"\frac{\sin(2\\theta)}{\sin(\\theta)}","2\\cos(\\theta)","Formule de l'angle double. Valide pour \\(\\sin(\\theta) \\neq 0\\)."
-"\tan(\\alpha + \\beta)","\frac{\\tan(\\alpha) + \\tan(\\beta)}{1 - \\tan(\\alpha)\\tan(\\beta)}","Formule d'addition pour la tangente."
+recto,versoSolution,versoInfo1,versoInfo2
+\sqrt{a^2 - x^2},x = a \sin(\theta),-a \le x \le a,\quad \sqrt{a^2 - x^2} = a \cos(\theta)
+\sqrt{a^2 + x^2},x = a \tan(\theta),x \in \mathbb{R},\quad \sqrt{a^2 + x^2} = a \sec(\theta)
+\sqrt{x^2 - a^2},x = a \sec(\theta),|x| \ge a,\quad \sqrt{x^2 - a^2} = a \tan(\theta)
+1 - \sin^2(\theta),\cos^2(\theta),\forall \theta,\quad \cos(\theta) = \sqrt{1 - \sin^2(\theta)}
+1 + \tan^2(\theta),\sec^2(\theta),\forall \theta,\quad \sec(\theta) = \sqrt{1 + \tan^2(\theta)}
+\sin(2\theta),2\sin(\theta)\cos(\theta),\forall \theta,info
+\cos(2\theta),\cos^2(\theta) - \sin^2(\theta),\forall \theta,\quad \cos(2\theta) = 1 - 2\sin^2(\theta)
+\tan(2\theta),\dfrac{2\tan(\theta)}{1 - \tan^2(\theta)},\tan^2(\theta) \ne 1,info
+\sin^2(\theta),\dfrac{1 - \cos(2\theta)}{2},\forall \theta,info
+\cos^2(\theta),\dfrac{1 + \cos(2\theta)}{2},\forall \theta,info
+\tan^2(\theta),\sec^2(\theta) - 1,\forall \theta,info
+\sin(\theta)\cos(\theta),\dfrac{1}{2}\sin(2\theta),\forall \theta,info
+1 - \cos(2\theta),2\sin^2(\theta),\forall \theta,info
+1 + \cos(2\theta),2\cos^2(\theta),\forall \theta,info
+\sin^3(\theta),\dfrac{3\sin(\theta) - \sin(3\theta)}{4},\forall \theta,info
+\cos^3(\theta),\dfrac{3\cos(\theta) + \cos(3\theta)}{4},\forall \theta,info
+\sin(\theta) \pm \cos(\theta),\sqrt{2}\sin(\theta \pm \pi/4),\forall \theta,info
+\tan(\theta),\dfrac{\sin(\theta)}{\cos(\theta)},\forall \theta,info
+\sec(\theta),\dfrac{1}{\cos(\theta)},\forall \theta,info
+\cos(\arctan(x)),\dfrac{1}{\sqrt{1+x^2}},x \in \mathbb{R},info

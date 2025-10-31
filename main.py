@@ -21,10 +21,9 @@ CSS = """
 .latex {
  font-size: 1.5em;
 }
-
-.mjx-mi { color: red; }     /* variables */
-.mjx-mn { color: green; }   /* nombres */
-.mjx-mo { color: blue; }    /* opérateurs */
+.mjx-mi { color: red; }     /* mathjax variables */
+.mjx-mn { color: green; }   /* mathjax nombres */
+.mjx-mo { color: blue; }    /* mathjax opérateurs */
 """
 
 
@@ -32,6 +31,12 @@ def create_anki_deck(input_file, output_file, force=False):
     """
     Crée un paquet Anki (.apkg) à partir d'un fichier CSV.
     """
+
+    def safe_get(row, key):
+        # Retourne toujours une chaîne (None -> ""), et enlève les espaces en début/fin.
+        val = row.get(key) if row is not None else ""
+        return (val or "").strip()
+
     # Définition du modèle de carte Anki (template)
     # Ce modèle inclut le support pour MathJax en entourant les champs de `\(...\)`
     anki_model = genanki.Model(
@@ -40,13 +45,14 @@ def create_anki_deck(input_file, output_file, force=False):
         fields=[
             {"name": "Recto"},
             {"name": "VersoSolution"},
-            {"name": "VersoInfos"},
+            {"name": "VersoInfo1"},
+            {"name": "VersoInfo2"},
         ],
         templates=[
             {
                 "name": "math",
                 "qfmt": r'<div class="latex">\({{Recto}}\)</div>',
-                "afmt": r'{{FrontSide}}<hr id="answer"><div class="latex">\({{VersoSolution}}\)</div><br><small>{{VersoInfos}}</small>',
+                "afmt": r'{{FrontSide}}<hr id="answer"><div class="latex">\({{VersoSolution}}\)</div><div><br><small>{{VersoInfo1}}</small><br><small>{{VersoInfo2}}</small></div>',
             },
         ],
         css=CSS,
@@ -65,9 +71,19 @@ def create_anki_deck(input_file, output_file, force=False):
         with open(input_file, "r", encoding="utf-8") as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
+                # Normaliser les champs pour éviter les None (genanki requiert des strings)
+                recto = safe_get(row, "recto")
+                versoSolution = safe_get(row, "versoSolution")
+                versoInfo1 = safe_get(row, "versoInfo1")
+                versoInfo2 = safe_get(row, "versoInfo2")
+
+                # Ignorer les lignes totalement vides
+                if not any((recto, versoSolution, versoInfo1, versoInfo2)):
+                    continue
+
                 note = genanki.Note(
                     model=anki_model,
-                    fields=[row["recto"], row["verso_solution"], row["verso_infos"]],
+                    fields=[recto, versoSolution, versoInfo1, versoInfo2],
                 )
                 anki_deck.add_note(note)
     except FileNotFoundError:
